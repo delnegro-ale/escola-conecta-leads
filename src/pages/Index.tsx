@@ -1,12 +1,33 @@
-// Update this page (the content is just a fallback if you fail to update the page)
+import { useRef } from "react";
+import { Header } from "@/components/Header";
+import { Hero } from "@/components/Hero";
+import { ValuesSection } from "@/components/ValuesSection";
+import { StructureSection } from "@/components/StructureSection";
+import { EducationLevels } from "@/components/EducationLevels";
+import { FormSection } from "@/components/FormSection";
+import { Footer } from "@/components/Footer";
+import { WhatsAppButton } from "@/components/WhatsAppButton";
 
 const Index = () => {
+  const scrollToForm = () => {
+    const formSection = document.getElementById("contato");
+    if (formSection) {
+      formSection.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+  };
+
   return (
-    <div className="flex min-h-screen items-center justify-center bg-background">
-      <div className="text-center">
-        <h1 className="mb-4 text-4xl font-bold">Welcome to Your Blank App</h1>
-        <p className="text-xl text-muted-foreground">Start building your amazing project here!</p>
-      </div>
+    <div className="min-h-screen">
+      <Header onCtaClick={scrollToForm} />
+      <main>
+        <Hero onCtaClick={scrollToForm} />
+        <ValuesSection />
+        <StructureSection />
+        <EducationLevels />
+        <FormSection />
+      </main>
+      <Footer />
+      <WhatsAppButton />
     </div>
   );
 };
