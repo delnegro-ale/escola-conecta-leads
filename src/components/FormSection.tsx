@@ -107,9 +107,9 @@ export const FormSection = ({ defaultUnit = "barra" }: FormSectionProps) => {
         // Determine the education level
         let level = "";
         if (gradeOptions.fundamentalI.includes(grade)) {
-          level = " (Ensino Fundamental I)";
+          level = " (Anos iniciais)";
         } else if (gradeOptions.fundamentalII.includes(grade)) {
-          level = " (Ensino Fundamental II)";
+          level = " (Anos finais)";
         } else if (gradeOptions.medio.includes(grade)) {
           level = " (Ensino Médio)";
         }
@@ -264,7 +264,7 @@ ${formData.observations}`;
                       <SelectContent>
                         {formData.unit === "barra" && (
                           <SelectGroup>
-                            <SelectLabel>ANOS INICIAIS (Fundamental I)</SelectLabel>
+                            <SelectLabel>ANOS INICIAIS</SelectLabel>
                             {gradeOptions.fundamentalI.map((grade) => (
                               <SelectItem key={grade.value} value={grade.value}>
                                 {grade.label}
@@ -273,7 +273,7 @@ ${formData.observations}`;
                           </SelectGroup>
                         )}
                         <SelectGroup>
-                          <SelectLabel>ANOS FINAIS (Fundamental II)</SelectLabel>
+                          <SelectLabel>ANOS FINAIS</SelectLabel>
                           {gradeOptions.fundamentalII.map((grade) => (
                             <SelectItem key={grade.value} value={grade.value}>
                               {grade.label}
