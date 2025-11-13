@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Award, Trophy, Phone } from "lucide-react";
-import heroImage from "@/assets/hero-section-nos.jpg";
+import heroImage from "@/assets/hero-school.jpg";
 
 interface HeroProps {
   onCtaClick: () => void;
