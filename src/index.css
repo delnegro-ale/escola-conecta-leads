@@ -26,7 +26,7 @@ All colors MUST be HSL.
     /* Neutral warm tones */
     --secondary: 40 15% 96%;
     --secondary-foreground: 210 20% 15%;
-    
+
     --muted: 40 12% 94%;
     --muted-foreground: 210 10% 45%;
 
@@ -49,7 +49,7 @@ All colors MUST be HSL.
 
     /* Gradients */
     --gradient-primary: linear-gradient(135deg, hsl(150 60% 45%) 0%, hsl(150 65% 35%) 100%);
-    --gradient-hero: linear-gradient(135deg, hsl(150 60% 45% / 0.95) 0%, hsl(150 65% 35% / 0.98) 100%);
+    --gradient-hero: linear-gradient(135deg, hsl(150 60% 45% / 0.15) 0%, hsl(150 65% 35% / 0.58) 100%);
     --gradient-warm: linear-gradient(180deg, hsl(40 15% 98%) 0%, hsl(0 0% 100%) 100%);
 
     /* Shadows */
@@ -66,7 +66,7 @@ All colors MUST be HSL.
   .dark {
     --background: 210 25% 8%;
     --foreground: 210 10% 95%;
-    
+
     --primary: 150 55% 50%;
     --primary-foreground: 210 25% 8%;
     --primary-light: 150 50% 60%;
@@ -113,11 +113,16 @@ All colors MUST be HSL.
 
   body {
     @apply bg-background text-foreground;
-    font-family: 'Inter', sans-serif;
+    font-family: "Inter", sans-serif;
   }
 
-  h1, h2, h3, h4, h5, h6 {
-    font-family: 'Poppins', sans-serif;
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: "Poppins", sans-serif;
   }
 }
 
