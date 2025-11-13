@@ -37,7 +37,7 @@ export const Hero = ({ onCtaClick, unit }: HeroProps) => {
             <div className="bg-background/90 backdrop-blur-sm px-6 py-3 rounded-full shadow-lg flex items-center gap-2">
               <Award className="text-primary" size={24} />
               <span className="font-semibold text-foreground" style={{ fontFamily: "Inter, sans-serif" }}>
-                6x em 1º lugar no ENEM
+                6ª melhor escola do Estado
               </span>
             </div>
           </div>
