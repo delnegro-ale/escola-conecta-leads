@@ -8,11 +8,10 @@ import { Button } from "@/components/ui/button";
 
 export const StructureSection = () => {
   const [currentImage, setCurrentImage] = useState(0);
-  
+
   const images = [
     { src: classroomImage, alt: "Sala de aula moderna do Colégio Nós" },
     { src: labImage, alt: "Laboratório de ciências equipado" },
-    { src: heroImage, alt: "Fachada do Colégio Nós" },
   ];
 
   // Auto-play carousel
@@ -61,14 +60,11 @@ export const StructureSection = () => {
         <div className="text-center max-w-3xl mx-auto mb-16">
           <h2
             className="text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mb-6"
-            style={{ fontFamily: 'Poppins, sans-serif' }}
+            style={{ fontFamily: "Poppins, sans-serif" }}
           >
             Estrutura Moderna
           </h2>
-          <p
-            className="text-lg md:text-xl text-muted-foreground"
-            style={{ fontFamily: 'Inter, sans-serif' }}
-          >
+          <p className="text-lg md:text-xl text-muted-foreground" style={{ fontFamily: "Inter, sans-serif" }}>
             Ambientes projetados para oferecer o melhor em educação e conforto
           </p>
         </div>
@@ -83,7 +79,7 @@ export const StructureSection = () => {
                 className="w-full h-full object-cover transition-transform duration-500"
               />
             </div>
-            
+
             {/* Navigation Buttons */}
             <Button
               variant="outline"
@@ -133,14 +129,11 @@ export const StructureSection = () => {
                     <div>
                       <h3
                         className="text-xl font-semibold text-foreground mb-2"
-                        style={{ fontFamily: 'Poppins, sans-serif' }}
+                        style={{ fontFamily: "Poppins, sans-serif" }}
                       >
                         {feature.title}
                       </h3>
-                      <p
-                        className="text-muted-foreground"
-                        style={{ fontFamily: 'Inter, sans-serif' }}
-                      >
+                      <p className="text-muted-foreground" style={{ fontFamily: "Inter, sans-serif" }}>
                         {feature.description}
                       </p>
                     </div>
