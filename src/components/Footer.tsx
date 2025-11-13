@@ -8,26 +8,20 @@ export const Footer = () => {
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
           {/* About */}
           <div>
-            <h3
-              className="text-2xl font-bold mb-4"
-              style={{ fontFamily: 'Poppins, sans-serif' }}
-            >
+            <h3 className="text-2xl font-bold mb-4" style={{ fontFamily: "Poppins, sans-serif" }}>
               Colégio Nós
             </h3>
-            <p className="text-background/80 mb-4" style={{ fontFamily: 'Inter, sans-serif' }}>
+            <p className="text-background/80 mb-4" style={{ fontFamily: "Inter, sans-serif" }}>
               Uma escola com propósito, resultados e acolhimento. Educação de excelência do 1º ano ao Pré-vestibular.
             </p>
           </div>
 
           {/* Contact */}
           <div>
-            <h4
-              className="text-lg font-semibold mb-4"
-              style={{ fontFamily: 'Poppins, sans-serif' }}
-            >
+            <h4 className="text-lg font-semibold mb-4" style={{ fontFamily: "Poppins, sans-serif" }}>
               Contato
             </h4>
-            <div className="space-y-3 text-background/80" style={{ fontFamily: 'Inter, sans-serif' }}>
+            <div className="space-y-3 text-background/80" style={{ fontFamily: "Inter, sans-serif" }}>
               <div className="flex items-start gap-2">
                 <Phone size={18} className="mt-1 flex-shrink-0" />
                 <div>
@@ -44,13 +38,10 @@ export const Footer = () => {
 
           {/* Units */}
           <div>
-            <h4
-              className="text-lg font-semibold mb-4"
-              style={{ fontFamily: 'Poppins, sans-serif' }}
-            >
+            <h4 className="text-lg font-semibold mb-4" style={{ fontFamily: "Poppins, sans-serif" }}>
               Nossas Unidades
             </h4>
-            <ul className="space-y-2 text-background/80" style={{ fontFamily: 'Inter, sans-serif' }}>
+            <ul className="space-y-2 text-background/80" style={{ fontFamily: "Inter, sans-serif" }}>
               <li>
                 <Link to="/barra" className="hover:text-background transition-colors">
                   Unidade Barra
@@ -71,13 +62,10 @@ export const Footer = () => {
 
           {/* Links */}
           <div>
-            <h4
-              className="text-lg font-semibold mb-4"
-              style={{ fontFamily: 'Poppins, sans-serif' }}
-            >
+            <h4 className="text-lg font-semibold mb-4" style={{ fontFamily: "Poppins, sans-serif" }}>
               Links Úteis
             </h4>
-            <ul className="space-y-2 text-background/80" style={{ fontFamily: 'Inter, sans-serif' }}>
+            <ul className="space-y-2 text-background/80" style={{ fontFamily: "Inter, sans-serif" }}>
               <li>
                 <a href="#inicio" className="hover:text-background transition-colors">
                   Início
@@ -109,7 +97,7 @@ export const Footer = () => {
 
         {/* Bottom Bar */}
         <div className="border-t border-background/20 pt-8 text-center">
-          <p className="text-background/70" style={{ fontFamily: 'Inter, sans-serif' }}>
+          <p className="text-background/70" style={{ fontFamily: "Inter, sans-serif" }}>
             © {new Date().getFullYear()} Colégio Nós. Todos os direitos reservados.
           </p>
         </div>
