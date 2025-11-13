@@ -4,6 +4,7 @@ import { Hero } from "@/components/Hero";
 import { ValuesSection } from "@/components/ValuesSection";
 import { StructureSection } from "@/components/StructureSection";
 import { EducationLevels } from "@/components/EducationLevels";
+import { AllLocationsSection } from "@/components/AllLocationsSection";
 import { FormSection } from "@/components/FormSection";
 import { Footer } from "@/components/Footer";
 
@@ -23,6 +24,7 @@ const Index = () => {
         <ValuesSection />
         <StructureSection />
         <EducationLevels />
+        <AllLocationsSection />
         <FormSection />
       </main>
       <Footer />
