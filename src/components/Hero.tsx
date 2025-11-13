@@ -53,8 +53,8 @@ export const Hero = ({ onCtaClick }: HeroProps) => {
             className="text-xl md:text-2xl text-background/95 max-w-3xl mx-auto leading-relaxed"
             style={{ fontFamily: "Inter, sans-serif" }}
           >
-            Educação de excelência do 1º ano ao Pré-vestibular, com foco em desenvolvimento integral e resultados
-            comprovados
+            Educação de excelência do 1º ano fundamental ao Pré-vestibular, com foco em desenvolvimento integral e
+            resultados comprovados
           </p>
 
           {/* CTA Buttons */}
