@@ -62,7 +62,8 @@ export const Hero = ({ onCtaClick }: HeroProps) => {
             <Button
               onClick={onCtaClick}
               size="lg"
-              className="bg-accent hover:bg-accent-hover text-accent-foreground font-bold text-lg px-8 py-6 rounded-xl shadow-xl transition-all duration-300 hover:shadow-2xl hover:scale-105"
+              variant="white"
+              className="font-bold text-lg px-8 py-6 rounded-xl transition-all duration-300 hover:scale-105"
               style={{ fontFamily: "Poppins, sans-serif" }}
             >
               Agendar visita
@@ -70,8 +71,8 @@ export const Hero = ({ onCtaClick }: HeroProps) => {
             <Button
               onClick={handleWhatsAppClick}
               size="lg"
-              variant="outline"
-              className="bg-background/95 hover:bg-background text-foreground font-semibold text-lg px-8 py-6 rounded-xl shadow-xl border-2 border-background transition-all duration-300 hover:scale-105"
+              variant="whatsapp"
+              className="font-semibold text-lg px-8 py-6 rounded-xl transition-all duration-300 hover:scale-105"
               style={{ fontFamily: "Poppins, sans-serif" }}
             >
               <Phone className="mr-2" size={20} />

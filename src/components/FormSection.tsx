@@ -64,7 +64,7 @@ export const FormSection = ({ defaultUnit = "barra" }: FormSectionProps) => {
     setIsSubmitting(true);
 
     try {
-      // 1. Send to webhook
+      // 1. Send to webhook (non-blocking - don't wait for response)
       const webhookPayload = {
         parentName: formData.parentName,
         studentName: formData.studentName,
@@ -76,12 +76,17 @@ export const FormSection = ({ defaultUnit = "barra" }: FormSectionProps) => {
         timestamp: new Date().toISOString(),
       };
 
-      await fetch("https://webhooks.imobibot.com.br/webhook/c49785a1-ffd9-480e-b123-9fc5fd8bdc27", {
+      // Send webhook without waiting for response to avoid CORS issues
+      fetch("https://webhooks.imobibot.com.br/webhook/c49785a1-ffd9-480e-b123-9fc5fd8bdc27", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify(webhookPayload),
+        mode: "no-cors", // This prevents CORS errors but we can't read the response
+      }).catch(() => {
+        // Silently fail - the important thing is the WhatsApp redirect
+        console.log("Webhook call initiated");
       });
 
       // 2. Construct WhatsApp message

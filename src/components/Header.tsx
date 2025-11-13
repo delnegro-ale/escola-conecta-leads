@@ -56,11 +56,12 @@ export const Header = ({ onCtaClick }: HeaderProps) => {
           {/* CTA Button - Desktop */}
           <div className="hidden md:block">
             <Button
-              onClick={onCtaClick}
-              className="bg-accent hover:bg-accent-hover text-accent-foreground font-semibold px-6 py-2 rounded-lg shadow-md transition-all duration-300 hover:shadow-lg hover:scale-105"
+              onClick={() => window.open("https://wa.me/5521988898684", "_blank")}
+              variant="whatsapp"
+              className="font-semibold px-6 py-2 rounded-lg transition-all duration-300 hover:scale-105"
               style={{ fontFamily: 'Poppins, sans-serif' }}
             >
-              Agende sua visita
+              Falar no WhatsApp
             </Button>
           </div>
 
@@ -89,13 +90,14 @@ export const Header = ({ onCtaClick }: HeaderProps) => {
             <div className="px-4 pt-2">
               <Button
                 onClick={() => {
-                  onCtaClick();
+                  window.open("https://wa.me/5521988898684", "_blank");
                   setIsMobileMenuOpen(false);
                 }}
-                className="w-full bg-accent hover:bg-accent-hover text-accent-foreground font-semibold"
+                variant="whatsapp"
+                className="w-full font-semibold"
                 style={{ fontFamily: 'Poppins, sans-serif' }}
               >
-                Agende sua visita
+                Falar no WhatsApp
               </Button>
             </div>
           </div>

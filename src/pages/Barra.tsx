@@ -3,6 +3,7 @@ import { Hero } from "@/components/Hero";
 import { ValuesSection } from "@/components/ValuesSection";
 import { StructureSection } from "@/components/StructureSection";
 import { EducationLevels } from "@/components/EducationLevels";
+import { LocationSection } from "@/components/LocationSection";
 import { FormSection } from "@/components/FormSection";
 import { Footer } from "@/components/Footer";
 import { WhatsAppButton } from "@/components/WhatsAppButton";
@@ -23,6 +24,7 @@ const Barra = () => {
         <ValuesSection />
         <StructureSection />
         <EducationLevels />
+        <LocationSection unit="barra" />
         <FormSection defaultUnit="barra" />
       </main>
       <Footer />
