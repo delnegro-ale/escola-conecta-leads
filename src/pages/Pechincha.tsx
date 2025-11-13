@@ -64,9 +64,9 @@ const Pechincha = () => {
 
   return (
     <div className="min-h-screen">
-      <Header onCtaClick={scrollToForm} />
+      <Header onCtaClick={scrollToForm} unit="pechincha" />
       <main>
-        <Hero onCtaClick={scrollToForm} />
+        <Hero onCtaClick={scrollToForm} unit="pechincha" />
         <ValuesSection />
         <StructureSection />
         

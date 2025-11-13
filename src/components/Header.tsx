@@ -6,10 +6,17 @@ import { WHATSAPP_NUMBER_CLEAN } from "@/constants/contact";
 
 interface HeaderProps {
   onCtaClick: () => void;
+  unit?: "barra" | "recreio" | "pechincha";
 }
 
-export const Header = ({ onCtaClick }: HeaderProps) => {
+export const Header = ({ onCtaClick, unit }: HeaderProps) => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
+  const handleWhatsAppClick = () => {
+    const uniteName = unit ? ` ${unit.charAt(0).toUpperCase() + unit.slice(1)}` : "";
+    const message = `Olá, eu vim pelo site do Colégio Nós${uniteName} e gostaria de uma ajuda`;
+    window.open(`https://wa.me/${WHATSAPP_NUMBER_CLEAN}?text=${encodeURIComponent(message)}`, "_blank");
+  };
 
   const scrollToSection = (id: string) => {
     const element = document.getElementById(id);
@@ -57,7 +64,7 @@ export const Header = ({ onCtaClick }: HeaderProps) => {
           {/* CTA Button - Desktop */}
           <div className="hidden md:block">
             <Button
-              onClick={() => window.open(`https://wa.me/${WHATSAPP_NUMBER_CLEAN}`, "_blank")}
+              onClick={handleWhatsAppClick}
               variant="whatsapp"
               className="font-semibold px-6 py-2 rounded-lg transition-all duration-300 hover:scale-105"
               style={{ fontFamily: 'Poppins, sans-serif' }}
@@ -91,7 +98,7 @@ export const Header = ({ onCtaClick }: HeaderProps) => {
             <div className="px-4 pt-2">
               <Button
                 onClick={() => {
-                  window.open(`https://wa.me/${WHATSAPP_NUMBER_CLEAN}`, "_blank");
+                  handleWhatsAppClick();
                   setIsMobileMenuOpen(false);
                 }}
                 variant="whatsapp"

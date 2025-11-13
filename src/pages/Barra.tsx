@@ -17,9 +17,9 @@ const Barra = () => {
 
   return (
     <div className="min-h-screen">
-      <Header onCtaClick={scrollToForm} />
+      <Header onCtaClick={scrollToForm} unit="barra" />
       <main>
-        <Hero onCtaClick={scrollToForm} />
+        <Hero onCtaClick={scrollToForm} unit="barra" />
         <ValuesSection />
         <StructureSection />
         <EducationLevels />

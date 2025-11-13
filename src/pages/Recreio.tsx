@@ -64,9 +64,9 @@ const Recreio = () => {
 
   return (
     <div className="min-h-screen">
-      <Header onCtaClick={scrollToForm} />
+      <Header onCtaClick={scrollToForm} unit="recreio" />
       <main>
-        <Hero onCtaClick={scrollToForm} />
+        <Hero onCtaClick={scrollToForm} unit="recreio" />
         <ValuesSection />
         <StructureSection />
         

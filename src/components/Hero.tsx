@@ -5,11 +5,14 @@ import { WHATSAPP_NUMBER_CLEAN } from "@/constants/contact";
 
 interface HeroProps {
   onCtaClick: () => void;
+  unit?: "barra" | "recreio" | "pechincha";
 }
 
-export const Hero = ({ onCtaClick }: HeroProps) => {
+export const Hero = ({ onCtaClick, unit }: HeroProps) => {
   const handleWhatsAppClick = () => {
-    window.open(`https://wa.me/${WHATSAPP_NUMBER_CLEAN}`, "_blank");
+    const uniteName = unit ? ` ${unit.charAt(0).toUpperCase() + unit.slice(1)}` : "";
+    const message = `Olá, eu vim pelo site do Colégio Nós${uniteName} e gostaria de uma ajuda`;
+    window.open(`https://wa.me/${WHATSAPP_NUMBER_CLEAN}?text=${encodeURIComponent(message)}`, "_blank");
   };
 
   return (

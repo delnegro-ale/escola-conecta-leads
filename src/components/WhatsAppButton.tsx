@@ -2,9 +2,15 @@ import { MessageCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { WHATSAPP_NUMBER_CLEAN } from "@/constants/contact";
 
-export const WhatsAppButton = () => {
+interface WhatsAppButtonProps {
+  unit?: "barra" | "recreio" | "pechincha";
+}
+
+export const WhatsAppButton = ({ unit }: WhatsAppButtonProps) => {
   const handleClick = () => {
-    window.open(`https://wa.me/${WHATSAPP_NUMBER_CLEAN}`, "_blank");
+    const uniteName = unit ? ` ${unit.charAt(0).toUpperCase() + unit.slice(1)}` : "";
+    const message = `Olá, eu vim pelo site do Colégio Nós${uniteName} e gostaria de uma ajuda`;
+    window.open(`https://wa.me/${WHATSAPP_NUMBER_CLEAN}?text=${encodeURIComponent(message)}`, "_blank");
   };
 
   return (
