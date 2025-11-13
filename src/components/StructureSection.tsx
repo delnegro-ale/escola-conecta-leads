@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { AirVent, Microscope, Music, Smartphone, ChevronLeft, ChevronRight } from "lucide-react";
 import classroomImage from "@/assets/classroom-modern.jpg";
@@ -11,7 +11,20 @@ export const StructureSection = () => {
   const images = [
     { src: classroomImage, alt: "Salas amplas e climatizadas" },
     { src: labImage, alt: "Laboratórios modernos de ciências" },
+    { src: classroomImage, alt: "Ambiente moderno e confortável" },
+    { src: labImage, alt: "Equipamentos de última geração" },
+    { src: classroomImage, alt: "Espaços integrados" },
+    { src: labImage, alt: "Infraestrutura completa" },
   ];
+
+  // Auto-play carousel
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentImage((prev) => (prev + 1) % images.length);
+    }, 4000); // Change image every 4 seconds
+
+    return () => clearInterval(interval);
+  }, [images.length]);
 
   const features = [
     {

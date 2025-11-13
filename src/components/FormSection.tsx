@@ -2,23 +2,53 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue, SelectGroup, SelectLabel } from "@/components/ui/select";
+import { Textarea } from "@/components/ui/textarea";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { useToast } from "@/hooks/use-toast";
 import { Send } from "lucide-react";
 
-export const FormSection = () => {
+interface FormSectionProps {
+  defaultUnit?: "barra" | "recreio" | "pechincha";
+}
+
+export const FormSection = ({ defaultUnit = "barra" }: FormSectionProps) => {
   const { toast } = useToast();
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [formData, setFormData] = useState({
     parentName: "",
     studentName: "",
     grade: "",
-    unit: "",
+    unit: defaultUnit,
     phone: "",
     email: "",
+    observations: "",
   });
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const gradeOptions = {
+    fundamentalI: [
+      { value: "1ano-f1", label: "1º ano" },
+      { value: "2ano-f1", label: "2º ano" },
+      { value: "3ano-f1", label: "3º ano" },
+      { value: "4ano-f1", label: "4º ano" },
+      { value: "5ano-f1", label: "5º ano" },
+    ],
+    fundamentalII: [
+      { value: "6ano", label: "6º ano" },
+      { value: "7ano", label: "7º ano" },
+      { value: "8ano", label: "8º ano" },
+      { value: "9ano", label: "9º ano" },
+    ],
+    medio: [
+      { value: "1ano-medio", label: "1º ano" },
+      { value: "2ano-medio", label: "2º ano" },
+      { value: "3ano-medio", label: "3º ano" },
+      { value: "pre-vestibular", label: "Pré-vestibular" },
+      { value: "pre-militar", label: "Pré-militar" },
+    ],
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
     // Basic validation
@@ -31,23 +61,94 @@ export const FormSection = () => {
       return;
     }
 
-    // Construct WhatsApp message
-    const message = `Olá! Gostaria de agendar uma visita ao Colégio Nós.
-    
-Nome do responsável: ${formData.parentName}
-Nome do aluno: ${formData.studentName}
-Série de interesse: ${formData.grade || "Não informado"}
-Unidade: ${formData.unit || "Não informado"}
+    setIsSubmitting(true);
+
+    try {
+      // 1. Send to webhook
+      const webhookPayload = {
+        parentName: formData.parentName,
+        studentName: formData.studentName,
+        grade: formData.grade,
+        unit: formData.unit,
+        phone: formData.phone,
+        email: formData.email,
+        observations: formData.observations,
+        timestamp: new Date().toISOString(),
+      };
+
+      await fetch("https://webhooks.imobibot.com.br/webhook/c49785a1-ffd9-480e-b123-9fc5fd8bdc27", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(webhookPayload),
+      });
+
+      // 2. Construct WhatsApp message
+      const getGradeLabel = (value: string) => {
+        const allGrades = [...gradeOptions.fundamentalI, ...gradeOptions.fundamentalII, ...gradeOptions.medio];
+        return allGrades.find(g => g.value === value)?.label || "Não informado";
+      };
+
+      const getUnitLabel = (value: string) => {
+        const units = { barra: "Barra", recreio: "Recreio", pechincha: "Pechincha" };
+        return units[value as keyof typeof units] || "Não informado";
+      };
+
+      let message = `Olá! Gostaria de agendar uma visita ao Colégio Nós.
+
+📋 *Dados do Responsável*
+Nome: ${formData.parentName}
+Email: ${formData.email}
 Telefone: ${formData.phone}
-Email: ${formData.email}`;
 
-    const whatsappUrl = `https://wa.me/5521995289612?text=${encodeURIComponent(message)}`;
-    window.open(whatsappUrl, "_blank");
+👨‍🎓 *Dados do Aluno*
+Nome: ${formData.studentName}
+Série de interesse: ${getGradeLabel(formData.grade)}
 
-    toast({
-      title: "Redirecionando...",
-      description: "Você será direcionado para o WhatsApp em instantes.",
-    });
+🏫 *Unidade*
+${getUnitLabel(formData.unit)}`;
+
+      if (formData.observations) {
+        message += `
+
+💬 *Observações*
+${formData.observations}`;
+      }
+
+      const whatsappUrl = `https://wa.me/5521988898684?text=${encodeURIComponent(message)}`;
+      
+      toast({
+        title: "Enviado com sucesso!",
+        description: "Redirecionando para o WhatsApp...",
+      });
+
+      // 3. Redirect to WhatsApp
+      setTimeout(() => {
+        window.open(whatsappUrl, "_blank");
+        setIsSubmitting(false);
+        
+        // Reset form
+        setFormData({
+          parentName: "",
+          studentName: "",
+          grade: "",
+          unit: defaultUnit,
+          phone: "",
+          email: "",
+          observations: "",
+        });
+      }, 500);
+
+    } catch (error) {
+      console.error("Error submitting form:", error);
+      toast({
+        title: "Erro ao enviar",
+        description: "Tente novamente em alguns instantes.",
+        variant: "destructive",
+      });
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -103,6 +204,22 @@ Email: ${formData.email}`;
 
                 <div className="grid md:grid-cols-2 gap-6">
                   <div className="space-y-2">
+                    <Label htmlFor="unit" className="text-base font-semibold">
+                      Unidade de interesse *
+                    </Label>
+                    <Select value={formData.unit} onValueChange={(value: "barra" | "recreio" | "pechincha") => setFormData({ ...formData, unit: value })}>
+                      <SelectTrigger id="unit" className="h-12">
+                        <SelectValue placeholder="Selecione a unidade" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="barra">Barra</SelectItem>
+                        <SelectItem value="recreio">Recreio</SelectItem>
+                        <SelectItem value="pechincha">Pechincha</SelectItem>
+                      </SelectContent>
+                    </Select>
+                  </div>
+
+                  <div className="space-y-2">
                     <Label htmlFor="grade" className="text-base font-semibold">
                       Série de interesse
                     </Label>
@@ -111,35 +228,32 @@ Email: ${formData.email}`;
                         <SelectValue placeholder="Selecione a série" />
                       </SelectTrigger>
                       <SelectContent>
-                        <SelectItem value="1ano">1º ano</SelectItem>
-                        <SelectItem value="2ano">2º ano</SelectItem>
-                        <SelectItem value="3ano">3º ano</SelectItem>
-                        <SelectItem value="4ano">4º ano</SelectItem>
-                        <SelectItem value="5ano">5º ano</SelectItem>
-                        <SelectItem value="6ano">6º ano</SelectItem>
-                        <SelectItem value="7ano">7º ano</SelectItem>
-                        <SelectItem value="8ano">8º ano</SelectItem>
-                        <SelectItem value="9ano">9º ano</SelectItem>
-                        <SelectItem value="1serie">1ª série (Médio)</SelectItem>
-                        <SelectItem value="2serie">2ª série (Médio)</SelectItem>
-                        <SelectItem value="3serie">3ª série (Médio)</SelectItem>
-                        <SelectItem value="pre">Pré-vestibular</SelectItem>
-                      </SelectContent>
-                    </Select>
-                  </div>
-
-                  <div className="space-y-2">
-                    <Label htmlFor="unit" className="text-base font-semibold">
-                      Unidade de interesse
-                    </Label>
-                    <Select value={formData.unit} onValueChange={(value) => setFormData({ ...formData, unit: value })}>
-                      <SelectTrigger id="unit" className="h-12">
-                        <SelectValue placeholder="Selecione a unidade" />
-                      </SelectTrigger>
-                      <SelectContent>
-                        <SelectItem value="barra">Barra</SelectItem>
-                        <SelectItem value="recreio">Recreio</SelectItem>
-                        <SelectItem value="pechincha">Pechincha</SelectItem>
+                        {formData.unit === "barra" && (
+                          <SelectGroup>
+                            <SelectLabel>ANOS INICIAIS (Fundamental I)</SelectLabel>
+                            {gradeOptions.fundamentalI.map((grade) => (
+                              <SelectItem key={grade.value} value={grade.value}>
+                                {grade.label}
+                              </SelectItem>
+                            ))}
+                          </SelectGroup>
+                        )}
+                        <SelectGroup>
+                          <SelectLabel>ANOS FINAIS (Fundamental II)</SelectLabel>
+                          {gradeOptions.fundamentalII.map((grade) => (
+                            <SelectItem key={grade.value} value={grade.value}>
+                              {grade.label}
+                            </SelectItem>
+                          ))}
+                        </SelectGroup>
+                        <SelectGroup>
+                          <SelectLabel>ENSINO MÉDIO</SelectLabel>
+                          {gradeOptions.medio.map((grade) => (
+                            <SelectItem key={grade.value} value={grade.value}>
+                              {grade.label}
+                            </SelectItem>
+                          ))}
+                        </SelectGroup>
                       </SelectContent>
                     </Select>
                   </div>
@@ -175,14 +289,28 @@ Email: ${formData.email}`;
                   />
                 </div>
 
+                <div className="space-y-2">
+                  <Label htmlFor="observations" className="text-base font-semibold">
+                    Observações (opcional)
+                  </Label>
+                  <Textarea
+                    id="observations"
+                    placeholder="Alguma informação adicional que gostaria de compartilhar..."
+                    value={formData.observations}
+                    onChange={(e) => setFormData({ ...formData, observations: e.target.value })}
+                    className="min-h-[100px]"
+                  />
+                </div>
+
                 <Button
                   type="submit"
                   size="lg"
-                  className="w-full bg-accent hover:bg-accent-hover text-accent-foreground font-bold text-lg py-6 rounded-xl shadow-lg transition-all duration-300 hover:shadow-xl hover:scale-105"
+                  disabled={isSubmitting}
+                  className="w-full bg-accent hover:bg-accent-hover text-accent-foreground font-bold text-lg py-6 rounded-xl shadow-lg transition-all duration-300 hover:shadow-xl hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed"
                   style={{ fontFamily: 'Poppins, sans-serif' }}
                 >
                   <Send className="mr-2" size={20} />
-                  Quero agendar uma visita
+                  {isSubmitting ? "Enviando..." : "Quero agendar uma visita"}
                 </Button>
               </form>
             </CardContent>
