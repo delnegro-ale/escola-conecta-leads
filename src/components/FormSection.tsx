@@ -100,7 +100,20 @@ export const FormSection = ({ defaultUnit = "barra" }: FormSectionProps) => {
       // 2. Construct WhatsApp message
       const getGradeLabel = (value: string) => {
         const allGrades = [...gradeOptions.fundamentalI, ...gradeOptions.fundamentalII, ...gradeOptions.medio];
-        return allGrades.find((g) => g.value === value)?.label || "Não informado";
+        const grade = allGrades.find((g) => g.value === value);
+        if (!grade) return "Não informado";
+        
+        // Determine the education level
+        let level = "";
+        if (gradeOptions.fundamentalI.includes(grade)) {
+          level = " (Ensino Fundamental I)";
+        } else if (gradeOptions.fundamentalII.includes(grade)) {
+          level = " (Ensino Fundamental II)";
+        } else if (gradeOptions.medio.includes(grade)) {
+          level = " (Ensino Médio)";
+        }
+        
+        return grade.label + level;
       };
 
       const getUnitLabel = (value: string) => {
@@ -117,7 +130,7 @@ Telefone: ${formData.phone}
 
 👨‍🎓 *Dados do Aluno*
 Nome: ${formData.studentName}
-Série de interesse: ${getGradeLabel(formData.grade)}
+Ano de interesse: ${getGradeLabel(formData.grade)}
 
 🏫 *Unidade*
 ${getUnitLabel(formData.unit)}`;
@@ -173,7 +186,7 @@ ${formData.observations}`;
                 className="text-3xl md:text-4xl font-bold text-primary-foreground mb-3"
                 style={{ fontFamily: "Poppins, sans-serif" }}
               >
-                Garanta a vaga do seu filho!
+                Matrículas abertas 2026
               </CardTitle>
               <CardDescription
                 className="text-lg text-primary-foreground/90"
@@ -238,14 +251,14 @@ ${formData.observations}`;
 
                   <div className="space-y-2">
                     <Label htmlFor="grade" className="text-base font-semibold">
-                      Série de interesse
+                      Ano de interesse
                     </Label>
                     <Select
                       value={formData.grade}
                       onValueChange={(value) => setFormData({ ...formData, grade: value })}
                     >
                       <SelectTrigger id="grade" className="h-12">
-                        <SelectValue placeholder="Selecione a série" />
+                        <SelectValue placeholder="Selecione o ano" />
                       </SelectTrigger>
                       <SelectContent>
                         {formData.unit === "barra" && (

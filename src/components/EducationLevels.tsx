@@ -36,7 +36,7 @@ export const EducationLevels = () => {
       id: "medio",
       label: "Ensino Médio",
       icon: GraduationCap,
-      title: "1ª à 3ª série",
+      title: "1º ao 3º ano",
       description: "Excelência e preparação para o futuro",
       features: [
         "Plataforma Evolucional (simulados ENEM e SISU)",

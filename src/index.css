@@ -19,9 +19,9 @@ All colors MUST be HSL.
     --primary-dark: 25 95% 48%;
 
     /* Green accent for CTAs */
-    --accent: 150 60% 45%;
+    --accent: 150 50% 40%;
     --accent-foreground: 0 0% 100%;
-    --accent-hover: 150 65% 35%;
+    --accent-hover: 150 55% 32%;
 
     /* Neutral warm tones */
     --secondary: 40 15% 96%;
@@ -72,9 +72,9 @@ All colors MUST be HSL.
     --primary-light: 25 85% 60%;
     --primary-dark: 25 90% 50%;
 
-    --accent: 150 55% 50%;
+    --accent: 150 45% 45%;
     --accent-foreground: 210 25% 8%;
-    --accent-hover: 150 60% 40%;
+    --accent-hover: 150 50% 35%;
 
     --secondary: 210 20% 14%;
     --secondary-foreground: 210 10% 95%;

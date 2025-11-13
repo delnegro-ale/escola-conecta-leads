@@ -3,18 +3,16 @@ import { Card, CardContent } from "@/components/ui/card";
 import { AirVent, Microscope, Music, Smartphone, ChevronLeft, ChevronRight } from "lucide-react";
 import classroomImage from "@/assets/classroom-modern.jpg";
 import labImage from "@/assets/lab-science.jpg";
+import heroImage from "@/assets/hero-section-nos.jpg";
 import { Button } from "@/components/ui/button";
 
 export const StructureSection = () => {
   const [currentImage, setCurrentImage] = useState(0);
   
   const images = [
-    { src: classroomImage, alt: "Salas amplas e climatizadas" },
-    { src: labImage, alt: "Laboratórios modernos de ciências" },
-    { src: classroomImage, alt: "Ambiente moderno e confortável" },
-    { src: labImage, alt: "Equipamentos de última geração" },
-    { src: classroomImage, alt: "Espaços integrados" },
-    { src: labImage, alt: "Infraestrutura completa" },
+    { src: classroomImage, alt: "Sala de aula moderna do Colégio Nós" },
+    { src: labImage, alt: "Laboratório de ciências equipado" },
+    { src: heroImage, alt: "Fachada do Colégio Nós" },
   ];
 
   // Auto-play carousel
