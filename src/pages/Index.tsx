@@ -6,7 +6,6 @@ import { StructureSection } from "@/components/StructureSection";
 import { EducationLevels } from "@/components/EducationLevels";
 import { FormSection } from "@/components/FormSection";
 import { Footer } from "@/components/Footer";
-import { WhatsAppButton } from "@/components/WhatsAppButton";
 
 const Index = () => {
   const scrollToForm = () => {
@@ -27,7 +26,6 @@ const Index = () => {
         <FormSection />
       </main>
       <Footer />
-      <WhatsAppButton />
     </div>
   );
 };

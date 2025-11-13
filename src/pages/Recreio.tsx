@@ -5,7 +5,6 @@ import { StructureSection } from "@/components/StructureSection";
 import { LocationSection } from "@/components/LocationSection";
 import { FormSection } from "@/components/FormSection";
 import { Footer } from "@/components/Footer";
-import { WhatsAppButton } from "@/components/WhatsAppButton";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { BookOpen, GraduationCap, Rocket } from "lucide-react";
@@ -152,7 +151,6 @@ const Recreio = () => {
         <FormSection defaultUnit="recreio" />
       </main>
       <Footer />
-      <WhatsAppButton />
     </div>
   );
 };

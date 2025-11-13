@@ -6,7 +6,6 @@ import { EducationLevels } from "@/components/EducationLevels";
 import { LocationSection } from "@/components/LocationSection";
 import { FormSection } from "@/components/FormSection";
 import { Footer } from "@/components/Footer";
-import { WhatsAppButton } from "@/components/WhatsAppButton";
 
 const Barra = () => {
   const scrollToForm = () => {
@@ -28,7 +27,6 @@ const Barra = () => {
         <FormSection defaultUnit="barra" />
       </main>
       <Footer />
-      <WhatsAppButton />
     </div>
   );
 };
