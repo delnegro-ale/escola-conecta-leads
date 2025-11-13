@@ -2,7 +2,15 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue, SelectGroup, SelectLabel } from "@/components/ui/select";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+  SelectGroup,
+  SelectLabel,
+} from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { useToast } from "@/hooks/use-toast";
@@ -50,7 +58,7 @@ export const FormSection = ({ defaultUnit = "barra" }: FormSectionProps) => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
+
     // Basic validation
     if (!formData.parentName || !formData.studentName || !formData.phone || !formData.email) {
       toast({
@@ -78,7 +86,7 @@ export const FormSection = ({ defaultUnit = "barra" }: FormSectionProps) => {
 
       // Send webhook without waiting for response to avoid CORS issues
       fetch("https://webhooks.imobibot.com.br/webhook/c49785a1-ffd9-480e-b123-9fc5fd8bdc27", {
-        method: "POST",
+        method: "GET",
         headers: {
           "Content-Type": "application/json",
         },
@@ -92,7 +100,7 @@ export const FormSection = ({ defaultUnit = "barra" }: FormSectionProps) => {
       // 2. Construct WhatsApp message
       const getGradeLabel = (value: string) => {
         const allGrades = [...gradeOptions.fundamentalI, ...gradeOptions.fundamentalII, ...gradeOptions.medio];
-        return allGrades.find(g => g.value === value)?.label || "Não informado";
+        return allGrades.find((g) => g.value === value)?.label || "Não informado";
       };
 
       const getUnitLabel = (value: string) => {
@@ -122,7 +130,7 @@ ${formData.observations}`;
       }
 
       const whatsappUrl = `https://wa.me/5521988898684?text=${encodeURIComponent(message)}`;
-      
+
       toast({
         title: "Enviado com sucesso!",
         description: "Redirecionando para o WhatsApp...",
@@ -132,7 +140,7 @@ ${formData.observations}`;
       setTimeout(() => {
         window.open(whatsappUrl, "_blank");
         setIsSubmitting(false);
-        
+
         // Reset form
         setFormData({
           parentName: "",
@@ -144,7 +152,6 @@ ${formData.observations}`;
           observations: "",
         });
       }, 500);
-
     } catch (error) {
       console.error("Error submitting form:", error);
       toast({
@@ -164,13 +171,13 @@ ${formData.observations}`;
             <CardHeader className="text-center pb-8 bg-gradient-primary rounded-t-lg">
               <CardTitle
                 className="text-3xl md:text-4xl font-bold text-primary-foreground mb-3"
-                style={{ fontFamily: 'Poppins, sans-serif' }}
+                style={{ fontFamily: "Poppins, sans-serif" }}
               >
                 Garanta a vaga do seu filho!
               </CardTitle>
               <CardDescription
                 className="text-lg text-primary-foreground/90"
-                style={{ fontFamily: 'Inter, sans-serif' }}
+                style={{ fontFamily: "Inter, sans-serif" }}
               >
                 Preencha o formulário e agende uma visita para conhecer nossa estrutura
               </CardDescription>
@@ -212,7 +219,12 @@ ${formData.observations}`;
                     <Label htmlFor="unit" className="text-base font-semibold">
                       Unidade de interesse *
                     </Label>
-                    <Select value={formData.unit} onValueChange={(value: "barra" | "recreio" | "pechincha") => setFormData({ ...formData, unit: value })}>
+                    <Select
+                      value={formData.unit}
+                      onValueChange={(value: "barra" | "recreio" | "pechincha") =>
+                        setFormData({ ...formData, unit: value })
+                      }
+                    >
                       <SelectTrigger id="unit" className="h-12">
                         <SelectValue placeholder="Selecione a unidade" />
                       </SelectTrigger>
@@ -228,7 +240,10 @@ ${formData.observations}`;
                     <Label htmlFor="grade" className="text-base font-semibold">
                       Série de interesse
                     </Label>
-                    <Select value={formData.grade} onValueChange={(value) => setFormData({ ...formData, grade: value })}>
+                    <Select
+                      value={formData.grade}
+                      onValueChange={(value) => setFormData({ ...formData, grade: value })}
+                    >
                       <SelectTrigger id="grade" className="h-12">
                         <SelectValue placeholder="Selecione a série" />
                       </SelectTrigger>
@@ -312,7 +327,7 @@ ${formData.observations}`;
                   size="lg"
                   disabled={isSubmitting}
                   className="w-full bg-accent hover:bg-accent-hover text-accent-foreground font-bold text-lg py-6 rounded-xl shadow-lg transition-all duration-300 hover:shadow-xl hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed"
-                  style={{ fontFamily: 'Poppins, sans-serif' }}
+                  style={{ fontFamily: "Poppins, sans-serif" }}
                 >
                   <Send className="mr-2" size={20} />
                   {isSubmitting ? "Enviando..." : "Quero agendar uma visita"}
