@@ -102,7 +102,7 @@ export const FormSection = ({ defaultUnit = "barra" }: FormSectionProps) => {
         const allGrades = [...gradeOptions.fundamentalI, ...gradeOptions.fundamentalII, ...gradeOptions.medio];
         const grade = allGrades.find((g) => g.value === value);
         if (!grade) return "Não informado";
-        
+
         // Determine the education level
         let level = "";
         if (gradeOptions.fundamentalI.includes(grade)) {
@@ -112,7 +112,7 @@ export const FormSection = ({ defaultUnit = "barra" }: FormSectionProps) => {
         } else if (gradeOptions.medio.includes(grade)) {
           level = " (Ensino Médio)";
         }
-        
+
         return grade.label + level;
       };
 
@@ -343,7 +343,7 @@ ${formData.observations}`;
                   style={{ fontFamily: "Poppins, sans-serif" }}
                 >
                   <Send className="mr-2" size={20} />
-                  {isSubmitting ? "Enviando..." : "Quero agendar uma visita"}
+                  {isSubmitting ? "Enviando..." : "Enviar por Whatsapp"}
                 </Button>
               </form>
             </CardContent>
