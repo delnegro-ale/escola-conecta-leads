@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Menu, X } from "lucide-react";
 import logo from "@/assets/logo-colegio-nos.png";
+import { WHATSAPP_NUMBER_CLEAN } from "@/constants/contact";
 
 interface HeaderProps {
   onCtaClick: () => void;
@@ -56,7 +57,7 @@ export const Header = ({ onCtaClick }: HeaderProps) => {
           {/* CTA Button - Desktop */}
           <div className="hidden md:block">
             <Button
-              onClick={() => window.open("https://wa.me/5521988898684", "_blank")}
+              onClick={() => window.open(`https://wa.me/${WHATSAPP_NUMBER_CLEAN}`, "_blank")}
               variant="whatsapp"
               className="font-semibold px-6 py-2 rounded-lg transition-all duration-300 hover:scale-105"
               style={{ fontFamily: 'Poppins, sans-serif' }}
@@ -90,7 +91,7 @@ export const Header = ({ onCtaClick }: HeaderProps) => {
             <div className="px-4 pt-2">
               <Button
                 onClick={() => {
-                  window.open("https://wa.me/5521988898684", "_blank");
+                  window.open(`https://wa.me/${WHATSAPP_NUMBER_CLEAN}`, "_blank");
                   setIsMobileMenuOpen(false);
                 }}
                 variant="whatsapp"

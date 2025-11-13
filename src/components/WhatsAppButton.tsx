@@ -1,9 +1,10 @@
 import { MessageCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { WHATSAPP_NUMBER_CLEAN } from "@/constants/contact";
 
 export const WhatsAppButton = () => {
   const handleClick = () => {
-    window.open("https://wa.me/5521995289612", "_blank");
+    window.open(`https://wa.me/${WHATSAPP_NUMBER_CLEAN}`, "_blank");
   };
 
   return (

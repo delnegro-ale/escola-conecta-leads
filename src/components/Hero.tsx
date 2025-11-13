@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Award, Trophy, Phone } from "lucide-react";
 import heroImage from "@/assets/hero-school.jpg";
+import { WHATSAPP_NUMBER_CLEAN } from "@/constants/contact";
 
 interface HeroProps {
   onCtaClick: () => void;
@@ -8,7 +9,7 @@ interface HeroProps {
 
 export const Hero = ({ onCtaClick }: HeroProps) => {
   const handleWhatsAppClick = () => {
-    window.open("https://wa.me/5521995289612", "_blank");
+    window.open(`https://wa.me/${WHATSAPP_NUMBER_CLEAN}`, "_blank");
   };
 
   return (

@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { WHATSAPP_NUMBER_CLEAN } from "@/constants/contact";
 import {
   Select,
   SelectContent,
@@ -142,7 +143,7 @@ ${getUnitLabel(formData.unit)}`;
 ${formData.observations}`;
       }
 
-      const whatsappUrl = `https://wa.me/5521988898684?text=${encodeURIComponent(message)}`;
+      const whatsappUrl = `https://wa.me/${WHATSAPP_NUMBER_CLEAN}?text=${encodeURIComponent(message)}`;
 
       toast({
         title: "Enviado com sucesso!",
