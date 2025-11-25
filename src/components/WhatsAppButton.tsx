@@ -10,7 +10,15 @@ export const WhatsAppButton = ({ unit }: WhatsAppButtonProps) => {
   const handleClick = () => {
     const uniteName = unit ? ` ${unit.charAt(0).toUpperCase() + unit.slice(1)}` : "";
     const message = `Olá, eu vim pelo site do Colégio Nós${uniteName} e gostaria de uma ajuda`;
-    window.open(`https://wa.me/${WHATSAPP_NUMBER_CLEAN}?text=${encodeURIComponent(message)}`, "_blank");
+
+    // @ts-ignore
+    window.dataLayer = window.dataLayer || [];
+    // @ts-ignore
+    window.dataLayer.push({ event: "WhatsappButton" });
+
+    setTimeout(() => {
+      window.open(`https://wa.me/${WHATSAPP_NUMBER_CLEAN}?text=${encodeURIComponent(message)}`, "_blank");
+    }, 300);
   };
 
   return (

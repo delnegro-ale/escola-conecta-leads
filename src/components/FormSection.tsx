@@ -150,6 +150,14 @@ ${formData.observations}`;
         description: "Redirecionando para o WhatsApp...",
       });
 
+      // @ts-ignore
+      window.dataLayer = window.dataLayer || [];
+      // @ts-ignore
+      window.dataLayer.push({
+        event: "WhatsappForm",
+        ...formData
+      });
+
       // 3. Redirect to WhatsApp
       setTimeout(() => {
         window.open(whatsappUrl, "_blank");

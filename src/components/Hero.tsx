@@ -12,7 +12,23 @@ export const Hero = ({ onCtaClick, unit }: HeroProps) => {
   const handleWhatsAppClick = () => {
     const uniteName = unit ? ` ${unit.charAt(0).toUpperCase() + unit.slice(1)}` : "";
     const message = `Olá, eu vim pelo site do Colégio Nós${uniteName} e gostaria de uma ajuda`;
-    window.open(`https://wa.me/${WHATSAPP_NUMBER_CLEAN}?text=${encodeURIComponent(message)}`, "_blank");
+
+    // @ts-ignore
+    window.dataLayer = window.dataLayer || [];
+    // @ts-ignore
+    window.dataLayer.push({ event: "WhatsappButton" });
+
+    setTimeout(() => {
+      window.open(`https://wa.me/${WHATSAPP_NUMBER_CLEAN}?text=${encodeURIComponent(message)}`, "_blank");
+    }, 300);
+  };
+
+  const handleCtaClick = () => {
+    // @ts-ignore
+    window.dataLayer = window.dataLayer || [];
+    // @ts-ignore
+    window.dataLayer.push({ event: "AgendarVisita" });
+    onCtaClick();
   };
 
   return (
@@ -64,7 +80,7 @@ export const Hero = ({ onCtaClick, unit }: HeroProps) => {
           {/* CTA Buttons */}
           <div className="flex flex-col sm:flex-row gap-4 justify-center pt-6">
             <Button
-              onClick={onCtaClick}
+              onClick={handleCtaClick}
               size="lg"
               variant="white"
               className="font-bold text-lg px-8 py-6 rounded-xl transition-all duration-300 hover:scale-105"
